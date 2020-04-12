@@ -12,6 +12,20 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from os.path import abspath, dirname
+import json
+from django.core.exceptions import ImproperlyConfigured
+
+with open(dirname(abspath(__file__))+"\\secrets.json") as f:
+    secrets = json.loads(f.read())
+
+# Keep secret keys in secrets.json
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {0} environment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
+ 
 
 # __file__ 지시자가 있는 현재 소스 파일의 경로 -> abspath로 절대 경로로 변환 -> 그 절대경로에 부모경로 -> 부모경로
 BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
@@ -21,7 +35,7 @@ BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '63-xa(idvn0jzv(j^wc9#^isue&1&s8&qn_7n^(6b(j!(qbby$'
+SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -142,3 +156,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+# gmail smtp 사용을 위한 설정
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'lge.nlp.iot.kr.op@gmail.com'
+# EMAIL_HOST_PASSWORD = 'lgenlp2019'
+# EMAIL_USE_TLS = True
+
+# naver smtp 사용을 위한 설정
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.naver.com'
+EMAIL_HOST_USER = get_secret("EMAIL_HOST_ID")
+EMAIL_HOST_PASSWORD = get_secret("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+DEFAULT_FROM_MAIL = get_secret("EMAIL_HOST_ID")
+
+ADMINS = [
+    ('ADMIN', get_secret("EMAIL_HOST_ID")+"@naver.com"),
+]
+WELCOME_EMAIL_SENDER = get_secret("EMAIL_HOST_ID")+"@naver.com"
