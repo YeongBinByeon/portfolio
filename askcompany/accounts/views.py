@@ -1,9 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView, logout_then_login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import (
+    LoginView, logout_then_login,
+    PasswordChangeView as AuthPasswordChangeView
+)
 from django.shortcuts import redirect, render
-from .forms import SignupForm, ProfileForm
+from django.urls import reverse_lazy
+from .forms import SignupForm, ProfileForm, PasswordChangeForm
 
 login = LoginView.as_view(template_name="accounts/login_form.html")
 
@@ -41,3 +46,17 @@ def profile_edit(request):
         "form":form,
     })
     
+
+class PasswordChangeView(LoginRequiredMixin, AuthPasswordChangeView):
+    success_url = reverse_lazy("password_change")
+    template_name = 'accounts/password_change_form.html'
+
+    # 변경 후 password를 변경 전 password와 동일하게 사용하지 못하도록 로직 추가 위함. forms.py에 내용 구현
+    form_class = PasswordChangeForm
+
+    # 암호 변경 성공 시 알림을 주기 위하여
+    def form_valid(self, form):
+        messages.success(self.request, "암호를 변경했습니다.")
+        return super().form_valid(form)
+
+password_change = PasswordChangeView.as_view()
