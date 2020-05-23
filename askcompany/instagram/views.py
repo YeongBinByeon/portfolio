@@ -1,7 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .forms import PostForm
+from .models import Post
 
 @login_required
 def post_new(request):
@@ -17,10 +18,16 @@ def post_new(request):
         
 
             messages.success(request, "포스팅을 저장했습니다.")
-            return redirect("/") # TODO get_absolute_url 활용
+            return redirect(post) # TODO get_absolute_url 활용 - Model에 함수 구현되어 있으면 해당 Value의 pk로 url 반환함.
     else:
         form = PostForm()
 
     return render(request, "instagram/post_form.html", {
         "form" : form,
+    })
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, "instagram/post_detail.html", {
+        "post":post,
     })
