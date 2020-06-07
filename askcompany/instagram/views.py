@@ -56,8 +56,16 @@ def user_page(request, username):
     post_list = Post.objects.filter(author=page_user)
     post_list_count = post_list.count() # 실제 데이터베이스에 count 쿼리를 던지게 된다.
     #len(post_list) 이렇게 쓰는거는 post_list 전체를 다 가져와서 메모리에 얹은 다음에 메모리상의 리스트의 갯수를 반환해주는 부분이다.
+    
+    #login이 되어 있을 경우 User 객체, 아닐 경우 AnonymousUser 객체 리턴
+    if request.user.is_authenticated:
+        is_follow = request.user.following_set.filter(pk=page_user.pk).exists()
+    else:
+        is_follow = False
+
     return render(request, "instagram/user_page.html", {
         "page_user":page_user,
         "post_list":post_list,
         "post_list_count":post_list_count,
+        "is_follow": is_follow,
     })
