@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 from .models import Post
 
 @login_required
@@ -74,6 +74,23 @@ def post_unlike(request, pk):
     redirect_url = request.META.get("HTTP_REFERER", "root")
     return redirect(redirect_url)
 
+@login_required
+def comment_new(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False) # author와 post 정보가 form에 지정되어 있지 않기 때문
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+            return redirect(comment.post)
+    else:
+        form = CommentForm()
+    return render(request, "instagram/comment_form.html", {
+        "form":form,
+    })
 
 def user_page(request, username):
     page_user = get_object_or_404(get_user_model(), username=username, is_active=True) # is_active는 접근 허용된 사람들만 보겠다는 의미
