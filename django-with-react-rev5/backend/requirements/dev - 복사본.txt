@@ -1,0 +1,4 @@
+npm install --global yarn
+yarn create react-app frontend
+yarn start 로 개발서버 띄우기
+yarn add --dev node-sass
