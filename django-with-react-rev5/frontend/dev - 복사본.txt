@@ -3,3 +3,4 @@ yarn create react-app frontend
 yarn start 로 개발서버 띄우기
 yarn add --dev node-sass
 yarn add axios
+yarn add react-router-dom #url 라우팅 처리를 react-router-dom 설치
