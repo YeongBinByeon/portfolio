@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Alert } from "antd";
 import Axios from "axios";
 import Post from "./Post";
 import { useAppContext } from "store";
@@ -12,7 +13,8 @@ function PostList() {
   } = useAppContext();
   const [postList, setPostList] = useState([]);
   useEffect(() => {
-    Axios.get(apiUrl)
+    const headers = { Authorization: `JWT ${jwtToken}` };
+    Axios.get(apiUrl, { headers })
       //Axios.get() 호출시 결과 promise 객체 반환함. status code 400 미만이면 then 수행
       .then((response) => {
         const { data } = response;
@@ -27,6 +29,10 @@ function PostList() {
   }, []);
   return (
     <div>
+      {postList.length === 0 && (
+        <Alert type="warning" message="포스팅이 없습니다. :-(" />
+      )}
+
       {postList.map((post) => {
         return <Post post={post} key={post.id} />;
       })}
