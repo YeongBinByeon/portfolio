@@ -2,8 +2,8 @@ import React from "react";
 import { Avatar, Button } from "antd";
 import "./Suggestion.scss";
 
-export default function Suggestion({ SuggestionUser }) {
-  const { username, name, avatar_url } = SuggestionUser;
+export default function Suggestion({ SuggestionUser, onFollowUser }) {
+  const { username, name, avatar_url, is_follow } = SuggestionUser;
   return (
     <div className="suggestion">
       <div className="avatar">
@@ -19,7 +19,12 @@ export default function Suggestion({ SuggestionUser }) {
       </div>
       <div className="username">{name.length === 0 ? username : name}</div>
       <div className="action">
-        <Button size="small">Follow</Button>
+        {is_follow && "팔로잉 중"}
+        {!is_follow && (
+          <Button size="small" onClick={() => onFollowUser(username)}>
+            Follow
+          </Button>
+        )}
       </div>
     </div>
   );
