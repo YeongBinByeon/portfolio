@@ -2,12 +2,14 @@ package com.example.study.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity // ==table
 //@Table(name = "user")  //Entity의 Class 이름과 DB의 Table 이름이 동일하다면 @Table Annotation 안써도 JPA가 알아서 mapping해준다.
 public class User {
