@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class UserRepositoryTest extends StudyApplicationTests {
 
@@ -28,12 +29,29 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     }
 
+    @Test
     public void read(){
-
+        Optional<User> user = userRepository.findById(2L);
+        
+        // ID가 2인 User가 있으면 출력하라는 의미
+        user.ifPresent(selectUser ->{
+            System.out.println("user : " + selectUser);
+            System.out.println("email : " + selectUser.getEmail());
+        });
     }
 
+    @Test
     public void update(){
+        Optional<User> user = userRepository.findById(2L);
 
+        user.ifPresent(selectUser ->{
+            selectUser.setAccount("PPPP");
+            selectUser.setUpdatedAt(LocalDateTime.now());
+            selectUser.setUpdatedBy("update method()");
+
+            // id가 table에 동일한게 존재하면 JPA가 구분하여 update를 해준다.
+            userRepository.save(selectUser);
+        });
     }
 
     public void delete(){
