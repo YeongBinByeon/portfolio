@@ -60,14 +60,14 @@ public class UserRepositoryTest extends StudyApplicationTests {
     @Test
     @Transactional
     public void delete(){
-        Optional<User> user = userRepository.findById(3L);
+        Optional<User> user = userRepository.findById(4L);
         Assert.assertTrue(user.isPresent());
 
         user.ifPresent(selectUser ->{
             userRepository.delete(selectUser);
         });
 
-        Optional<User> deleteUser = userRepository.findById(3L);
+        Optional<User> deleteUser = userRepository.findById(4L);
 
         Assert.assertFalse(deleteUser.isPresent());
 
