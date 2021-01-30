@@ -35,7 +35,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     @Test
     @Transactional
     public void read(){
-        Optional<User> user = userRepository.findById(4L);
+        Optional<User> user = userRepository.findByAccount("TestUser03");
         
         // ID가 2인 User가 있으면 출력하라는 의미
         user.ifPresent(selectUser ->{
