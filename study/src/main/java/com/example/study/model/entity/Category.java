@@ -1,33 +1,28 @@
 package com.example.study.model.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-import javax.persistence.*;
-import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity // java는 카멜 케이스를 쓰지만, db는 snake case를 쓰기 때문에 자동적으로 order_detail 테이블에 연결되게 된다.
-public class OrderDetail {
+@Data
+@Entity
+public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String status;
-
-    private LocalDateTime arrivalDate;
-    private Integer quantity;
-    private BigDecimal totalPrice;
+    private String type;
+    private String title;
     private LocalDateTime createdAt;
     private String createdBy;
     private LocalDateTime updatedAt;
     private String updatedBy;
-
-
-
 }
