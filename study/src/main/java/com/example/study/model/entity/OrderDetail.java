@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity // java는 카멜 케이스를 쓰지만, db는 snake case를 쓰기 때문에 자동적으로 order_detail 테이블에 연결되게 된다.
-@ToString(exclude = {"orderGroup"})
+@ToString(exclude = {"orderGroup", "item"})
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,9 @@ public class OrderDetail {
     private LocalDateTime updatedAt;
     private String updatedBy;
 
-    private Long itemId;
+    // OrderDetail N : 1 Item
+    @ManyToOne
+    private Item item;
 
     // OrderDetail N : 1 OrderGroup
     @ManyToOne
