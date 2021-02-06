@@ -3,6 +3,7 @@ package com.example.study.model.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity // ==table
 //@Table(name = "user")  //Entity의 Class 이름과 DB의 Table 이름이 동일하다면 @Table Annotation 안써도 JPA가 알아서 mapping해준다.
+@ToString(exclude = {"orderGroup"})
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +33,7 @@ public class User {
     private LocalDateTime updatedAt;
     private String updatedBy;
 
-
+    // User 1 : N OrderGroup
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    private List<OrderGroup> orderGroupList;
 }
