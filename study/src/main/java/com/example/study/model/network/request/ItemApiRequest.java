@@ -1,5 +1,6 @@
 package com.example.study.model.network.request;
 
+import com.example.study.model.enumclass.ItemStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 public class ItemApiRequest {
     private Long id;
 
-    private String status;
+    private ItemStatus status; // 등록 / 해지 / 검수중(등록대기중)
 
     private String name;
 
