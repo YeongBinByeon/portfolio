@@ -1,5 +1,6 @@
 package com.example.study.model.entity;
 
+import com.example.study.model.enumclass.UserStatus;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
@@ -27,7 +28,9 @@ public class User {
     private Long id;
     private String account;
     private String password;
-    private String status;
+
+    @Enumerated(EnumType.STRING)
+    private UserStatus status; // REGISTERED / UNREGISTERED / WAITING
 
     // @Column(name = "account") // 변수의 명과 데이터베이스 column의 명이 동일하다면 이 annotation도 안써도 된다.
     private String email;
