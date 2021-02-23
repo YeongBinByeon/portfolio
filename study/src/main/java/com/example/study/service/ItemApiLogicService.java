@@ -18,8 +18,6 @@ public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResp
     @Autowired
     private PartnerRepository partnerRepository;
 
-    @Autowired
-    private ItemRepository itemRepository;
 
     @Override
     public Header<ItemApiResponse> create(Header<ItemApiRequest> request) {
@@ -36,13 +34,13 @@ public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResp
                 .partner(partnerRepository.getOne(body.getPartnerId()))
                 .build();
 
-        Item newItem = itemRepository.save(item);
+        Item newItem = baseRepository.save(item);
         return response(newItem);
     }
 
     @Override
     public Header<ItemApiResponse> read(Long id) {
-        return itemRepository.findById(id)
+        return baseRepository.findById(id)
                 .map(item-> response(item))
                 .orElseGet(()-> Header.<ItemApiResponse>ERROR("데이터 없음"));
     }
@@ -50,7 +48,7 @@ public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResp
     @Override
     public Header<ItemApiResponse> update(Header<ItemApiRequest> request) {
         ItemApiRequest body = request.getData();
-        return itemRepository.findById(body.getId())
+        return baseRepository.findById(body.getId())
                 .map(entityItem ->{
                     entityItem
                             .setStatus(body.getStatus())
@@ -64,17 +62,17 @@ public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResp
                             ;
                     return entityItem;
                 })
-                .map(newEntityItem -> itemRepository.save(newEntityItem))
+                .map(newEntityItem -> baseRepository.save(newEntityItem))
                 .map(item -> response(item))
                 .orElseGet(()->Header.ERROR("데이터 없음"));
     }
 
     @Override
     public Header delete(Long id) {
-        return itemRepository.findById(id)
+        return baseRepository.findById(id)
                 .map(item -> {
                     // delete메서드는 void를 return해서 map 함수에서는 반드시 return 값이 존재해야 하기에 아래처럼 씀
-                    itemRepository.delete(item);
+                    baseRepository.delete(item);
                     return Header.OK();
                 })
                 .orElseGet(()->Header.ERROR("데이터 없음"));
