@@ -8,11 +8,9 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-@Getter
-@Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @RequiredArgsConstructor
 public class Person {
     @Id
@@ -27,6 +25,7 @@ public class Person {
 
     private String hobby;
 
+    @NonNull
     private String bloodType;
 
     private String address;
@@ -38,19 +37,4 @@ public class Person {
     @ToString.Exclude
     private String phoneNumber;
 
-    @Override
-    public boolean equals(Object obj) {
-        if(obj == null){
-            return false;
-        }
-        Person person = (Person)obj;
-
-        if (!person.getName().equals(this.getName())){
-            return false;
-        }
-        if (person.getAge() != this.getAge()){
-            return false;
-        }
-        return true;
-    }
 }
