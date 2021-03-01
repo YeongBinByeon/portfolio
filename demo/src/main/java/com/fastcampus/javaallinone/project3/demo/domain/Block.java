@@ -1,6 +1,9 @@
 package com.fastcampus.javaallinone.project3.demo.domain;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,11 +12,14 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@NoArgsConstructor
+@RequiredArgsConstructor
 public class Block {
     @Id
     @GeneratedValue
     private Long id;
 
+    @NonNull
     private String name;
 
     private String reason;
