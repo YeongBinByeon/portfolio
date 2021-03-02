@@ -68,6 +68,13 @@ class PersonServiceTest {
         result.forEach(System.out::println);
     }
 
+    @Test
+    void getPeopleByName(){
+        givenPeople();
+        List<Person> result = personService.getPeopleByName("martin");
+        result.forEach(System.out::println);
+    }
+
     private void givenBlockPerson(String name, int age, String bloodType){
         Person blockPerson = new Person(name, age, bloodType);
         blockPerson.setBlock(new Block(name));
