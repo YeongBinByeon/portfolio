@@ -1,5 +1,6 @@
 package com.fastcampus.javaallinone.project3.demo.domain;
 
+import com.fastcampus.javaallinone.project3.demo.domain.dto.Birthday;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,7 +29,9 @@ public class Person {
 
     private String address;
 
-    private LocalDate birthday;
+
+    @Embedded
+    private Birthday birthday;
 
     private String job;
 
