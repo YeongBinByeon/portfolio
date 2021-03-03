@@ -17,6 +17,7 @@ public class Person {
     private Long id;
 
     @NonNull
+    @Column(nullable = false)
     private String name;
 
     @NonNull
@@ -25,6 +26,7 @@ public class Person {
     private String hobby;
 
     @NonNull
+    @Column(nullable = false)
     private String bloodType;
 
     private String address;
