@@ -22,30 +22,45 @@ class PersonRepositoryTest {
     private PersonRepository personRepository;
 
     @Test
-    void crud(){
-        Person person = new Person();
-        person.setName("john");
+    void findByName(){
+        List<Person> people = personRepository.findByName("tony");
+        Assert.assertEquals(people.size(),1);
 
-        personRepository.save(person);
-        System.out.println(personRepository.findAll());
-
-        List<Person> result = personRepository.findByName("john");
-        Assert.assertEquals(result.size(),1);
-        Assert.assertEquals(result.get(0).getName(), "john");
-        //Assert.assertEquals(result.get(0).getAge(),10);
-
+        Person person = people.get(0);
+        assertAll(
+                ()->Assert.assertEquals(person.getName(),"tony"),
+                ()->Assert.assertEquals(person.getHobby(),"reading"),
+                ()->Assert.assertEquals(person.getAddress(),"seoul"),
+                ()->Assert.assertEquals(person.getBirthday(), Birthday.of(LocalDate.of(1991,7,10))),
+                ()->Assert.assertEquals(person.getJob(),"officer"),
+                ()->Assert.assertEquals(person.getPhoneNumber(),"010-2222-5555"),
+                ()->Assert.assertEquals(person.isDeleted(),false)
+        );
     }
 
     @Test
-    void findByBirthdayBetween(){
-
-        List<Person> result = personRepository.findByMonthOfBirthday(8);
-        Assert.assertEquals(result.size(),2);
-        Assert.assertEquals(result.get(0).getName(),"martin");
-        Assert.assertEquals(result.get(1).getName(),"sophia");
-
+    void findByNameIfDeleted(){
+        List<Person> people = personRepository.findByName("andrew");
+        Assert.assertEquals(people.size(),0);
     }
 
+    @Test
+    void findByMonthOfBirthday(){
+        List<Person> people = personRepository.findByMonthOfBirthday(7);
 
+        Assert.assertEquals(people.size(), 2);
+        assertAll(
+                ()->Assert.assertEquals(people.get(0).getName(),"david"),
+                ()->Assert.assertEquals(people.get(1).getName(),"tony")
+        );
+    }
+
+    @Test
+    void findPeopleDeleted(){
+        List<Person> people = personRepository.findPeopleDeleted();
+
+        Assert.assertEquals(people.size(),1);
+        Assert.assertEquals(people.get(0).getName(),"andrew");
+    }
 
 }
