@@ -25,7 +25,6 @@ class PersonRepositoryTest {
     void crud(){
         Person person = new Person();
         person.setName("john");
-        person.setAge(10);
         person.setBloodType("A");
 
         personRepository.save(person);
@@ -34,7 +33,7 @@ class PersonRepositoryTest {
         List<Person> result = personRepository.findByName("john");
         Assert.assertEquals(result.size(),1);
         Assert.assertEquals(result.get(0).getName(), "john");
-        Assert.assertEquals(result.get(0).getAge(),10);
+        //Assert.assertEquals(result.get(0).getAge(),10);
         Assert.assertEquals(result.get(0).getBloodType(), "A");
     }
 
