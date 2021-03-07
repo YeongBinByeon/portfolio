@@ -20,4 +20,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
         //@Query(value = "select * from person where month_of_birthday = :monthOfBirthday", nativeQuery = true)
     List<Person> findByMonthOfBirthday(@Param("monthOfBirthday") int monthOfBirthday);
 
+    @Query(value = "select * from person where person.deleted = true", nativeQuery = true)
+    List<Person> findPeopleDeleted();
+
 }

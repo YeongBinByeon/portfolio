@@ -1,5 +1,9 @@
 package com.fastcampus.javaallinone.project3.demo.controller;
 
+import com.fastcampus.javaallinone.project3.demo.repository.PersonRepository;
+
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +22,18 @@ class PersonControllerTest {
     @Autowired
     private PersonController personController;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     private MockMvc mockMvc;
+
+    @BeforeEach
+    void beforeEach(){
+        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
+    }
 
     @Test
     void getPerson() throws Exception{
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
-
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/api/person/1"))
                 .andDo(print())
@@ -32,8 +42,6 @@ class PersonControllerTest {
 
     @Test
     void postPerson() throws Exception{
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
-
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/api/person")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -48,8 +56,6 @@ class PersonControllerTest {
 
     @Test
     void modifyPerson() throws Exception{
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
-
         mockMvc.perform(
                 MockMvcRequestBuilders.put("/api/person/1")
                         .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -64,13 +70,20 @@ class PersonControllerTest {
 
     @Test
     void modifyName() throws Exception{
-        mockMvc = MockMvcBuilders.standaloneSetup(personController).build();
-
         mockMvc.perform(
                 MockMvcRequestBuilders.patch("/api/person/1")
                         .param("name", "martin2"))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    void deletePerson() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/person/1"))
+                .andDo(print())
+                .andExpect(status().isOk());
+        //log.info("people deleted : {}", personRepository.findPeopleDeleted());
+        System.out.println(personRepository.findPeopleDeleted());
     }
 
 

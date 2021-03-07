@@ -3,6 +3,8 @@ package com.fastcampus.javaallinone.project3.demo.domain;
 import com.fastcampus.javaallinone.project3.demo.controller.dto.PersonDto;
 import com.fastcampus.javaallinone.project3.demo.domain.dto.Birthday;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Where;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
@@ -13,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Data
 @RequiredArgsConstructor
+@Where(clause = "deleted = false")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +44,9 @@ public class Person {
 
     @ToString.Exclude
     private String phoneNumber;
+
+    @ColumnDefault("0")
+    private boolean deleted;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
