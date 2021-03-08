@@ -3,6 +3,8 @@ package com.fastcampus.javaallinone.project3.demo.service;
 import com.fastcampus.javaallinone.project3.demo.controller.dto.PersonDto;
 import com.fastcampus.javaallinone.project3.demo.domain.Person;
 import com.fastcampus.javaallinone.project3.demo.domain.dto.Birthday;
+import com.fastcampus.javaallinone.project3.demo.exception.PersonNotFoundException;
+import com.fastcampus.javaallinone.project3.demo.exception.RenameNotPermittedException;
 import com.fastcampus.javaallinone.project3.demo.repository.PersonRepository;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
@@ -66,7 +68,7 @@ class PersonServiceTest {
     @Test
     void modifyIfPersonNotFound(){
         when(personRepository.findById(1L)).thenReturn(Optional.empty());
-        assertThrows(RuntimeException.class, ()->personService.modify(1L, mockPersonDto()));
+        assertThrows(PersonNotFoundException.class, ()->personService.modify(1L, mockPersonDto()));
     }
 
     @Test
@@ -74,7 +76,7 @@ class PersonServiceTest {
         when(personRepository.findById(1L))
                 .thenReturn(Optional.of(new Person("tony")));
 
-        assertThrows(RuntimeException.class, ()->personService.modify(1L, mockPersonDto()));
+        assertThrows(RenameNotPermittedException.class, ()->personService.modify(1L, mockPersonDto()));
     }
 
     @Test
@@ -110,7 +112,7 @@ class PersonServiceTest {
         when(personRepository.findById(1L))
                 .thenReturn(Optional.empty());
 
-        assertThrows(RuntimeException.class, ()->personService.delete(1L));
+        assertThrows(PersonNotFoundException.class, ()->personService.delete(1L));
     }
 
     @Test
