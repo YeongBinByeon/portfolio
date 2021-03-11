@@ -3,7 +3,7 @@ package com.fastcampus.javaallinone.project3.demo.service;
 import com.fastcampus.javaallinone.project3.demo.controller.dto.PersonDto;
 import com.fastcampus.javaallinone.project3.demo.domain.Person;
 import com.fastcampus.javaallinone.project3.demo.exception.PersonNotFoundException;
-import com.fastcampus.javaallinone.project3.demo.exception.RenameNotPermittedException;
+import com.fastcampus.javaallinone.project3.demo.exception.RenameIsNotPermittedException;
 import com.fastcampus.javaallinone.project3.demo.repository.PersonRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class PersonService {
         // validation 체크
         // 이름이 바뀌는 경우는 거의 없다는 상황 가정하고 아래 로직 추가
         if (!person.getName().equals(personDto.getName())){
-            throw new RenameNotPermittedException();
+            throw new RenameIsNotPermittedException();
         }
 
         person.set(personDto);

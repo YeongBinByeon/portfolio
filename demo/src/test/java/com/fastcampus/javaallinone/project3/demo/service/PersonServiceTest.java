@@ -4,7 +4,7 @@ import com.fastcampus.javaallinone.project3.demo.controller.dto.PersonDto;
 import com.fastcampus.javaallinone.project3.demo.domain.Person;
 import com.fastcampus.javaallinone.project3.demo.domain.dto.Birthday;
 import com.fastcampus.javaallinone.project3.demo.exception.PersonNotFoundException;
-import com.fastcampus.javaallinone.project3.demo.exception.RenameNotPermittedException;
+import com.fastcampus.javaallinone.project3.demo.exception.RenameIsNotPermittedException;
 import com.fastcampus.javaallinone.project3.demo.repository.PersonRepository;
 import org.assertj.core.util.Lists;
 import org.junit.Assert;
@@ -14,8 +14,6 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -76,7 +74,7 @@ class PersonServiceTest {
         when(personRepository.findById(1L))
                 .thenReturn(Optional.of(new Person("tony")));
 
-        assertThrows(RenameNotPermittedException.class, ()->personService.modify(1L, mockPersonDto()));
+        assertThrows(RenameIsNotPermittedException.class, ()->personService.modify(1L, mockPersonDto()));
     }
 
     @Test
