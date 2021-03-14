@@ -1,2 +1,4 @@
 npm init
 npm i vue nuxt
+npm i vuetify @nuxtjs/vuetify
+npm i @nuxtjs/axios axios
