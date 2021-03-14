@@ -1,7 +1,7 @@
 <template>
-    <div>
-        signup page
-    </div>
+    
+    <div>signup page</div>
+    
 </template>
 
 <script>
@@ -11,6 +11,11 @@ export default{
             name:"Nuext.js",
         }
     },
+    head(){
+        return{
+            title:'회원가입'
+        }
+    }
 }
 
 </script>

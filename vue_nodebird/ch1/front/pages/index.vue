@@ -1,7 +1,7 @@
 <template>
-    <div>
-        Hello !! {{name}}
-    </div>
+    
+    <div>main page</div>
+    
 </template>
 
 <script>
@@ -11,6 +11,7 @@ export default{
             name:"Nuext.js",
         }
     },
+
 }
 
 </script>
