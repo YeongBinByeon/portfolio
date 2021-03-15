@@ -3,21 +3,18 @@
     "name": "profile",
     "path": "/profile",
     "component": "C:\\\\code_folder\\\\portfolio\\\\vue_nodebird\\\\ch1\\\\front\\\\pages\\\\profile.vue",
-    "chunkName": "pages/profile",
-    "_name": "_5aec2f63"
+    "chunkName": "pages/profile"
   },
   {
     "name": "signup",
     "path": "/signup",
     "component": "C:\\\\code_folder\\\\portfolio\\\\vue_nodebird\\\\ch1\\\\front\\\\pages\\\\signup.vue",
-    "chunkName": "pages/signup",
-    "_name": "_36aa6bce"
+    "chunkName": "pages/signup"
   },
   {
     "name": "index",
     "path": "/",
     "component": "C:\\\\code_folder\\\\portfolio\\\\vue_nodebird\\\\ch1\\\\front\\\\pages\\\\index.vue",
-    "chunkName": "pages/index",
-    "_name": "_4a62dae8"
+    "chunkName": "pages/index"
   }
 ]
