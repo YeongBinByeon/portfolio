@@ -1,16 +1,30 @@
 <template>
-    
-    <div>main page</div>
+    <div>
+        <v-container>
+            <div>
+                <post-card/>
+                <post-card/>
+                <post-card/>
+                <post-card/>
+                <post-card/>
+            </div>
+        </v-container>
+    </div>
     
 </template>
 
 <script>
-export default{
-    data(){
-        return{
-            name:"Nuext.js",
-        }
-    },
+import PostCard from '~/components/PostCard';
+
+    export default{
+        components:{
+            PostCard,
+        },
+        data(){
+            return{
+                name:"Nuext.js",
+            }
+        },
 
 }
 
