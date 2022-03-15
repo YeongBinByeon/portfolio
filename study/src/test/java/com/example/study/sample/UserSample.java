@@ -42,7 +42,7 @@ public class UserSample extends StudyApplicationTests {
                     .unregisteredAt(status.equals(UserStatus.UNREGISTERED) ? getRandomDate() : null )
                     .build();
 
-            log.info("{}",user);
+            //log.info("{}",user);
             userRepository.save(user);
         }
 

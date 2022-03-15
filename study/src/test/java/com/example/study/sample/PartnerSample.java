@@ -51,7 +51,7 @@ public class PartnerSample extends StudyApplicationTests {
                         .unregisteredAt(status.equals("UNREGISTERED") ? getRandomDate() : null )
                         .build();
 
-                log.info("{}",partner);
+                //log.info("{}",partner);
                 partnerRepository.save(partner);
             }
         }
