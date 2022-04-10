@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create # create, none. none으로 바꾸면 table 드랍하지 않음(data base에 넣어놓은 data 그대로 쓸 수 있음)
     properties:
       hibernate:
 #        show-sql: true
