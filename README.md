@@ -11,6 +11,7 @@ https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-JP
 스프링 부트 쇼핑몰 프로젝트 ( 2022/04/16 ~ 2022/04/27)
 
 project path : shopping-mall/shop
+
 development environment
 1. IDE : IntelliJ
 2. JDK : JDK 11
