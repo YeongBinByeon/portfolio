@@ -93,9 +93,9 @@ public class UserServiceImpl implements UserService{
                     new ParameterizedTypeReference<List<ResponseOrder>>() {
         });
 
-        List<ResponseOrder> orderList = orderListResponse.getBody();
+        List<ResponseOrder> ordersList = orderListResponse.getBody();
 
-        userDto.setOrders(orderList);
+        userDto.setOrders(ordersList);
 
         return userDto;
     }
