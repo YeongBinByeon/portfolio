@@ -1,6 +1,7 @@
 # portfolio
 
-[파이썬, 장고 프레임워크] 인스타그램 클론코딩 프로젝트 진행 (2020/4/12 ~ 2020/7/14) 구현 기능 (상세 내용 우측 깃 페이지에서 확인 - https://github.com/YeongBinByeon/portfolio/commits/master/askcompany)
+[파이썬, 장고 프레임워크] 인스타그램 클론코딩 프로젝트 진행 (2020/4/12 ~ 2020/7/14) 
+  구현 기능 (상세 내용 우측 깃 페이지에서 확인 - https://github.com/YeongBinByeon/portfolio/commits/master/askcompany)
   1. 회원가입(환영 이메일 보내기), 로그인, 로그아웃
   2. 포스팅 쓰기, 포스팅 수정
   3. 댓글 쓰기, 댓글 수정
