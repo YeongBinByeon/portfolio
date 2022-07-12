@@ -9,4 +9,4 @@ spring:
     config:
       server:
         git:
-          uri: file:///C:/code_folder/spring-cloud-config-2
+          uri: https://github.com/YeongBinByeon/spring-cloud-config
