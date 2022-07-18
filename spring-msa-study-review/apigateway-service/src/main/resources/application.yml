@@ -89,5 +89,5 @@ management:
         include: refresh, health, beans, httptrace, busrefresh
 
 
-token:
-  secret: user_token
+#token:
+#  secret: user_token
