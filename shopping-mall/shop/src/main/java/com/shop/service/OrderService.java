@@ -64,6 +64,7 @@ public class OrderService {
         return new PageImpl<OrderHistDto>(orderHistDtos, pageable, totalCount);
     }
 
+
     @Transactional(readOnly = true)
     public boolean validateOrder(Long orderId, String email){
         Member curMember = memberRepository.findByEmail(email);

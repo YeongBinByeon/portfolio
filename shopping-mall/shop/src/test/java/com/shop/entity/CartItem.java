@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class CartItem {
     @Id
     @GeneratedValue
-    @Column(name = "cart_item")
+    @Column(name = "cart_item_id")
     private Long id;
 
     @ManyToOne
