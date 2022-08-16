@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @NoArgsConstructor
-public class CartItem {
+public class CartItem extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cart_item_id")

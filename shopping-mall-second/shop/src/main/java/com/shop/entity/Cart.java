@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter @Setter
 @ToString
 @NoArgsConstructor
-public class Cart {
+public class Cart extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
