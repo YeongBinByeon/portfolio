@@ -28,6 +28,7 @@ public class FeignErrorDecoder implements ErrorDecoder {
                     return new ResponseStatusException(HttpStatus.valueOf(response.status()),
                             env.getProperty("order_service.exception.orders_is_empty"));
                 }
+                break;
             default:
                 return new Exception(response.reason());
         }
